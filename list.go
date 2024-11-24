@@ -14,8 +14,8 @@ func (l *List[T]) IsEmpty() bool {
 	return l.Head == nil
 }
 
-func (l *List[T]) Len() uint {
-	var n uint
+func (l *List[T]) Len() int {
+	var n int
 	for node := l.Head; node != nil; node = node.Next {
 		n++
 	}
