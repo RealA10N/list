@@ -10,6 +10,13 @@ type List[T any] struct {
 	Tail *Node[T]
 }
 
+func FromSlice[T any](values []T) (l List[T]) {
+	for _, v := range values {
+		l.Append(v)
+	}
+	return
+}
+
 func (l *List[T]) IsEmpty() bool {
 	return l.Head == nil
 }
