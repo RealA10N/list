@@ -110,3 +110,42 @@ func TestRange2(t *testing.T) {
 		i++
 	}
 }
+
+func TestRangeBreak(t *testing.T) {
+	slice := []int{1, 2, 3, 4, 5}
+	l := list.FromSlice(slice)
+	i := 0
+	for v := range l.Range() {
+		if v != slice[i] {
+			t.Errorf("expected value %d, got %d", slice[i], v)
+		}
+		i++
+		if i == 3 {
+			break
+		}
+	}
+	if i != 3 {
+		t.Errorf("expected to break after 3 iterations, got %d", i)
+	}
+}
+
+func TestRange2Break(t *testing.T) {
+	slice := []int{1, 2, 3, 4, 5}
+	l := list.FromSlice(slice)
+	i := 0
+	for idx, v := range l.Range2() {
+		if idx != i {
+			t.Errorf("expected index %d, got %d", i, idx)
+		}
+		if v != slice[i] {
+			t.Errorf("expected value %d, got %d", slice[i], v)
+		}
+		i++
+		if i == 3 {
+			break
+		}
+	}
+	if i != 3 {
+		t.Errorf("expected to break after 3 iterations, got %d", i)
+	}
+}
