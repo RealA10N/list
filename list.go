@@ -22,17 +22,25 @@ func (l *List[T]) Len() uint {
 	return n
 }
 
-func (l *List[T]) Range(f func(T)) {
+func (l *List[T]) Range() func(func(T) bool) {
+	return func(yield func(T) bool) {
 	for node := l.Head; node != nil; node = node.Next {
-		f(node.Value)
+			if !yield(node.Value) {
+				return
+			}
+		}
 	}
 }
 
-func (l *List[T]) Range2(f func(uint, T)) {
-	var i uint
+func (l *List[T]) Range2() func(func(int, T) bool) {
+	return func(yield func(int, T) bool) {
+		var i int
 	for node := l.Head; node != nil; node = node.Next {
-		f(i, node.Value)
+			if !yield(i, node.Value) {
+				return
+			}
 		i++
+		}
 	}
 }
 
