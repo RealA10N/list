@@ -31,7 +31,7 @@ func (l *List[T]) Len() int {
 
 func (l *List[T]) Range() func(func(T) bool) {
 	return func(yield func(T) bool) {
-	for node := l.Head; node != nil; node = node.Next {
+		for node := l.Head; node != nil; node = node.Next {
 			if !yield(node.Value) {
 				return
 			}
@@ -42,11 +42,11 @@ func (l *List[T]) Range() func(func(T) bool) {
 func (l *List[T]) Range2() func(func(int, T) bool) {
 	return func(yield func(int, T) bool) {
 		var i int
-	for node := l.Head; node != nil; node = node.Next {
+		for node := l.Head; node != nil; node = node.Next {
 			if !yield(i, node.Value) {
 				return
 			}
-		i++
+			i++
 		}
 	}
 }
