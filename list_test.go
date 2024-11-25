@@ -47,6 +47,17 @@ func TestLen(t *testing.T) {
 	}
 }
 
+func TestErase(t *testing.T) {
+	l := list.FromSlice([]int{1, 2, 3, 4, 5})
+	l.Erase()
+	if !l.IsEmpty() {
+		t.Error("expected list to be empty after erase")
+	}
+	if l.Len() != 0 {
+		t.Errorf("expected length 0 after erase, got %d", l.Len())
+	}
+}
+
 func TestAppend(t *testing.T) {
 	l := list.List[int]{}
 	l.Append(1)
@@ -82,6 +93,10 @@ func TestExtend(t *testing.T) {
 			t.Errorf("expected value %d, got %d", expectedValues[i], v)
 		}
 		i++
+	}
+
+	if !l2.IsEmpty() {
+		t.Errorf("expected second list to be empty after extend")
 	}
 }
 func TestRange(t *testing.T) {

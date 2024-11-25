@@ -29,6 +29,12 @@ func (l *List[T]) Len() int {
 	return n
 }
 
+// Erase the contents of the list, making it empty.
+func (l *List[T]) Erase() {
+	l.Head = nil
+	l.Tail = nil
+}
+
 func (l *List[T]) Range() func(func(T) bool) {
 	return func(yield func(T) bool) {
 		for node := l.Head; node != nil; node = node.Next {
@@ -65,4 +71,5 @@ func (l *List[T]) Append(value T) {
 func (l *List[T]) Extend(l2 *List[T]) {
 	l.Tail.Next = l2.Head
 	l.Tail = l2.Tail
+	l2.Erase()
 }
