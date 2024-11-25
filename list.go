@@ -10,6 +10,7 @@ type List[T any] struct {
 	Tail *Node[T]
 }
 
+// Create a new list from a slice of values.
 func FromSlice[T any](values []T) (l List[T]) {
 	for _, v := range values {
 		l.Append(v)
@@ -17,10 +18,12 @@ func FromSlice[T any](values []T) (l List[T]) {
 	return
 }
 
+// Returns true if the list consists of exactly zero nodes.
 func (l *List[T]) IsEmpty() bool {
 	return l.Head == nil
 }
 
+// Iterates over the list and returns the node count.
 func (l *List[T]) Len() int {
 	var n int
 	for node := l.Head; node != nil; node = node.Next {
@@ -35,6 +38,7 @@ func (l *List[T]) Erase() {
 	l.Tail = nil
 }
 
+// Iterate over the list, yielding each value.
 func (l *List[T]) Range() func(func(T) bool) {
 	return func(yield func(T) bool) {
 		for node := l.Head; node != nil; node = node.Next {
@@ -45,6 +49,7 @@ func (l *List[T]) Range() func(func(T) bool) {
 	}
 }
 
+// Iterate over the list, yielding each value and its index.
 func (l *List[T]) Range2() func(func(int, T) bool) {
 	return func(yield func(int, T) bool) {
 		var i int
@@ -57,6 +62,7 @@ func (l *List[T]) Range2() func(func(int, T) bool) {
 	}
 }
 
+// Append a value to the end of the list.
 func (l *List[T]) Append(value T) {
 	node := &Node[T]{Value: value}
 	if l.IsEmpty() {
@@ -68,6 +74,8 @@ func (l *List[T]) Append(value T) {
 	}
 }
 
+// Extend the list with the contents of another list.
+// Erases the second list, making it empty.
 func (l *List[T]) Extend(l2 *List[T]) {
 	l.Tail.Next = l2.Head
 	l.Tail = l2.Tail
