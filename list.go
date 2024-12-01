@@ -81,7 +81,13 @@ func (l *List[T]) Extend(l2 *List[T]) {
 		return
 	}
 
-	l.Tail.Next = l2.Head
-	l.Tail = l2.Tail
+	if l.IsEmpty() {
+		l.Head = l2.Head
+		l.Tail = l2.Tail
+	} else {
+		l.Tail.Next = l2.Head
+		l.Tail = l2.Tail
+	}
+
 	l2.Erase()
 }
