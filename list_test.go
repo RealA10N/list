@@ -99,6 +99,23 @@ func TestExtend(t *testing.T) {
 		t.Errorf("expected second list to be empty after extend")
 	}
 }
+
+func TestExtendWithNil(t *testing.T) {
+	slice := []int{1, 2, 3}
+	l1 := list.FromSlice(slice)
+	l1.Extend(nil)
+
+	if l1.Len() != len(slice) {
+		t.Errorf("expected length %d, got %d", len(slice), l1.Len())
+	}
+
+	for i, v := range l1.Range2() {
+		if v != slice[i] {
+			t.Errorf("expected value %d, got %d", slice[i], v)
+		}
+	}
+}
+
 func TestRange(t *testing.T) {
 	slice := []int{1, 2, 3, 4, 5}
 	l := list.FromSlice(slice)

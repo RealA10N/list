@@ -77,6 +77,10 @@ func (l *List[T]) Append(value T) {
 // Extend the list with the contents of another list.
 // Erases the second list, making it empty.
 func (l *List[T]) Extend(l2 *List[T]) {
+	if l2 == nil {
+		return
+	}
+
 	l.Tail.Next = l2.Head
 	l.Tail = l2.Tail
 	l2.Erase()
