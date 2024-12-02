@@ -18,6 +18,12 @@ func FromSlice[T any](values []T) (l List[T]) {
 	return
 }
 
+// Create a new list from a single value.
+func FromSingle[T any](value T) List[T] {
+	node := Node[T]{Value: value}
+	return List[T]{Head: &node, Tail: &node}
+}
+
 // Returns true if the list consists of exactly zero nodes.
 func (l *List[T]) IsEmpty() bool {
 	return l.Head == nil
