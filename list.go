@@ -24,6 +24,13 @@ func FromSingle[T any](value T) List[T] {
 	return List[T]{Head: &node, Tail: &node}
 }
 
+func (l *List[T]) ToSlice() (values []T) {
+	for node := l.Head; node != nil; node = node.Next {
+		values = append(values, node.Value)
+	}
+	return
+}
+
 // Returns true if the list consists of exactly zero nodes.
 func (l *List[T]) IsEmpty() bool {
 	return l.Head == nil
