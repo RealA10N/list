@@ -4,6 +4,7 @@ import (
 	"testing"
 
 	"alon.kr/x/list"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestFromSlice(t *testing.T) {
@@ -117,6 +118,14 @@ func TestExtendWithNil(t *testing.T) {
 }
 
 func TestExtendWithEmpty(t *testing.T) {
+	slice := []int{1, 2, 3}
+	l1 := list.FromSlice(slice)
+	l2 := list.List[int]{}
+	l1.Extend(&l2)
+	assert.Equal(t, slice, l1.ToSlice())
+}
+
+func TestExtendToEmpty(t *testing.T) {
 	slice := []int{1, 2, 3}
 	l1 := list.List[int]{}
 	l2 := list.FromSlice(slice)
